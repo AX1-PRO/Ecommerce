@@ -1,0 +1,21 @@
+# Dependencies (مجلدات المكتبات)
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Environment Variables (ملفات المتغيرات الحساسة)
+.env
+server/.env
+client/.env
+
+# Production Builds (مجلدات البناء)
+client/build/
+client/dist/
+server/dist/
+
+# Logs (ملفات السجلات)
+logs/
+*.log
+# OS Files (ملفات النظام)
+.DS_Store
+Thumbs.db

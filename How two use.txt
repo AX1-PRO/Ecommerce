@@ -1,0 +1,229 @@
+
+## 📑 Table of Contents
+1. [Authentication](#-authentication-auth)
+2. [User]
+3. [Categories]
+4. [Subcategories](
+5. [Brands]
+6. [Products]
+7. [Review]
+8. [Favorites]
+9. [Coupon]
+10. [Cart]
+11. [Order]
+12. [Access Levels]
+
+---
+
+## 🔐 Authentication (`/auth`)
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| POST | `/auth/signup` | Register a new user | Public |
+| POST | `/auth/login` | Login user | Public |
+| POST | `/auth/forgetpassword` | Request password reset code | Public |
+| POST | `/auth/verifyresetcode` | Verify reset code | Public |
+| POST | `/auth/resetpassword` | Reset password with code | Public |
+
+---
+
+## 👤 Users (`/user`)
+
+### Logged-in User Routes
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| GET | `/user/getme` | Get logged-in user data | User |
+| PUT | `/user/updatemepassword` | Update logged-in user password | User |
+| PUT | `/user/updatemedata` | Update logged-in user data (multipart: `img_cover`) | User |
+| DELETE | `/user/deleteme` | Delete logged-in user account | User |
+| POST | `/user/logout` | Logout | User |
+| POST | `/user/addaddress` | Add address to profile | User |
+
+### Admin Routes
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| POST | `/user` | Create new user (multipart: `img_cover`) | Admin |
+| GET | `/user` | Get all users | Admin |
+| GET | `/user/:id` | Get specific user | Admin |
+| PUT | `/user/:id` | Update user (multipart: `img_cover`) | Admin |
+| DELETE | `/user/:id` | Delete user | Admin |
+| PUT | `/user/changepass/:id` | Reset user password | Admin |
+
+---
+
+## 🗂️ Categories (`/categorys`)
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| POST | `/categorys` | Create category (multipart: `img`) | Admin |
+| GET | `/categorys` | Get all categories | Public |
+| GET | `/categorys/:id` | Get specific category | Public |
+| PUT | `/categorys/:id` | Update category (multipart: `img`) | Admin |
+| DELETE | `/categorys/:id` | Delete category | Admin |
+
+### Nested: Subcategories
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| POST | `/categorys/:categoryid/subcategory` | Create subcategory (multipart: `img`) | Admin |
+| GET | `/categorys/:categoryid/subcategory` | Get all subcategories | Public |
+| GET | `/categorys/:categoryid/subcategory/:id` | Get specific subcategory | Public |
+| PUT | `/categorys/:categoryid/subcategory/:id` | Update subcategory (multipart: `img`) | Admin |
+| DELETE | `/categorys/:categoryid/subcategory/:id` | Delete subcategory | Admin |
+
+---
+
+## 🏷️ Subcategories (`/subcategorys`)
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| POST | `/subcategorys` | Create subcategory (multipart: `img`) | Admin |
+| GET | `/subcategorys` | Get all subcategories | Public |
+| GET | `/subcategorys/:id` | Get specific subcategory | Public |
+| PUT | `/subcategorys/:id` | Update subcategory (multipart: `img`) | Admin |
+| DELETE | `/subcategorys/:id` | Delete subcategory | Admin |
+
+---
+
+## 🏢 Brands (`/brands`)
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| POST | `/brands` | Create brand (multipart: `img`) | Admin |
+| GET | `/brands` | Get all brands | Public |
+| GET | `/brands/:id` | Get specific brand | Public |
+| PUT | `/brands/:id` | Update brand (multipart: `img`) | Admin |
+| DELETE | `/brands/:id` | Delete brand | Admin |
+
+---
+
+## 📦 Products (`/products`)
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| POST | `/products` | Create product (multipart: `img_cover` ×1, `imgs` ×3) | Admin |
+| GET | `/products` | Get all products | Public |
+| GET | `/products/:id` | Get specific product | Public |
+| PUT | `/products/:id` | Update product (multipart: `img_cover`) | Admin |
+| DELETE | `/products/:id` | Delete product | Admin |
+| DELETE | `/products/:id/:imgname` | Delete product image | Admin |
+| PUT | `/products/:id/addimg` | Add product image (multipart: `img`) | Admin |
+
+---
+
+## ⭐ Reviews (`/review`)
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| POST | `/review` | Create review | User |
+| GET | `/review` | Get all reviews | Public |
+| GET | `/review/:id` | Get specific review | User |
+| PUT | `/review/:id` | Update review | User |
+| DELETE | `/review/:id` | Delete review | User / Admin |
+
+---
+
+## ❤️ Favorites (`/favorits`)
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| POST | `/favorits` | Add to favorites | User / Admin |
+| GET | `/favorits` | Get all favorites | User / Admin |
+| DELETE | `/favorits/:id` | Remove from favorites | User / Admin |
+
+---
+
+## 🎟️ Coupons (`/coupon`)
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| POST | `/coupon` | Create coupon | Admin |
+| GET | `/coupon` | Get all coupons | Admin |
+| GET | `/coupon/:id` | Get specific coupon | Admin |
+| PUT | `/coupon/:id` | Update coupon | Admin |
+| DELETE | `/coupon/:id` | Delete coupon | Admin |
+
+---
+
+## 🛒 Cart (`/cart`)
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| POST | `/cart` | Add item to cart | User / Admin |
+| GET | `/cart` | Get user cart | User / Admin |
+| DELETE | `/cart` | Clear cart | User / Admin |
+| POST | `/cart/applaycoupon` | Apply coupon to cart | User / Admin |
+| PUT | `/cart/:itemid` | Update cart item | User / Admin |
+| DELETE | `/cart/:itemid` | Delete item from cart | User / Admin |
+
+---
+
+## 📋 Orders (`/order`)
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| GET | `/order` | Get all orders | Admin |
+| GET | `/order/me` | Get logged-in user's orders | User / Admin |
+| GET | `/order/checkout/:cartid` | Create checkout session | User / Admin |
+| POST | `/order/:cartid` | Create cash order | User / Admin |
+| GET | `/order/:cartid` | Get specific order | Admin |
+| DELETE | `/order/me/:orderid` | Delete user's own order | User / Admin |
+| DELETE | `/order/:orderid` | Delete specific order | Admin |
+| PUT | `/order/:id/pay` | Mark order as paid | Admin |
+| PUT | `/order/:id/delivary` | Mark order as delivered | Admin |
+
+---
+##env backend 
+PORT=
+mongoo url
+DB_URL=
+MOD
+NODE_ENV="dev"
+url Website
+WEBURL=
+Jwt SecretKEy
+JWT_KEY=
+gmail setting
+GMAIL_NAME=
+GMAIL_PASSWORD=
+GMAIL_PORT=
+stripe
+STRIPE_SECRET_KEY=
+
+
+## 🔑 Access Levels
+
+| Level | Description |
+|-------|-------------|
+| **Public** | No authentication required |
+| **User** | Requires valid user token |
+| **Admin** | Requires valid admin token |
+| **User / Admin** | Either role can access |
+
+---
+
+## 📝 Notes
+
+1. **Authentication**: Protected routes require a valid JWT token (typically via `Authorization: Bearer <token>` header).
+2. **File Uploads**: Endpoints marked with `multipart` accept `multipart/form-data` with the specified field names.
+3. **Validation**: All routes include request validators (express-validator) that run before the controller.
+4. **Nested Routes**: Subcategories are accessible both as nested routes under categories and as standalone routes.
+5. **Coupon & Favorite routes**: Apply `protect_route` and `allowed_to` middleware globally at the router level.
+
+---
+
+## 🧪 Example Requests
+
+### Signup
+```http
+POST /api/v1/auth/signup
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "password123",
+  "passwordConfirm": "password123"
+}
